@@ -1,27 +1,27 @@
-import React from 'react';
-import { Form, redirect, useNavigation, Link } from 'react-router-dom';
-import customFetch from '../utils/customFetch';
-import { toast } from 'react-toastify';
-import LogoLang from '../components/LogoLang';
-export const action = async ({ request }) => {
-  const formData = await request.formData();
-  const data = Object.fromEntries(formData);
+import React from "react";
+import { Form, redirect, useNavigation, Link } from "react-router-dom";
+// import customFetch from '../utils/customFetch';
+// import { toast } from 'react-toastify';
+import LogoLang from "../components/LogoLang";
+// export const action = async ({ request }) => {
+//   const formData = await request.formData();
+//   const data = Object.fromEntries(formData);
 
-  try {
-    await customFetch.post('/auth/register', data);
-    toast.success(
-      'Erfolgreich registriert! Bitte bestätige deine E-Mail-Adresse.'
-    );
-    return redirect('/login');
-  } catch (error) {
-    toast.error(error?.response?.data?.msg);
-    return error;
-  }
-};
+//   try {
+//     await customFetch.post('/auth/register', data);
+//     toast.success(
+//       'Erfolgreich registriert! Bitte bestätige deine E-Mail-Adresse.'
+//     );
+//     return redirect('/login');
+//   } catch (error) {
+//     toast.error(error?.response?.data?.msg);
+//     return error;
+//   }
+// };
 
 const Register = () => {
   const navigation = useNavigation();
-  const isSubmitting = navigation.state === 'submitting';
+  const isSubmitting = navigation.state === "submitting";
   return (
     <>
       <div className="h-full bg-gray-50">
@@ -128,10 +128,10 @@ const Register = () => {
                         htmlFor="agb"
                         className="ml-3 block text-sm leading-6 text-gray-900"
                       >
-                        Ich stimme den{' '}
+                        Ich stimme den{" "}
                         <Link className="text-newport-900" to="/agb">
                           AGB
-                        </Link>{' '}
+                        </Link>{" "}
                         zu
                       </label>
                     </div>
@@ -143,7 +143,7 @@ const Register = () => {
                       className="flex w-full justify-center rounded-md bg-newport-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-svisitPrimary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-newport-900"
                       disabled={isSubmitting}
                     >
-                      {isSubmitting ? 'Registriert...' : 'Registrieren'}
+                      {isSubmitting ? "Registriert..." : "Registrieren"}
                     </button>
                   </div>
                 </Form>

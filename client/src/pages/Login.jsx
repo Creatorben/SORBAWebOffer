@@ -1,46 +1,46 @@
-import React from 'react';
+import React from "react";
 import {
   Form,
   redirect,
   useNavigation,
   Link,
   useSearchParams,
-} from 'react-router-dom';
-import customFetch from '../utils/customFetch';
-import { toast } from 'react-toastify';
-import LogoLang from '../components/LogoLang';
+} from "react-router-dom";
+// import customFetch from '../utils/customFetch';
+// import { toast } from 'react-toastify';
+import LogoLang from "../components/LogoLang";
 
-export const action =
-  (queryClient) =>
-  async ({ request }) => {
-    const formData = await request.formData();
-    const data = Object.fromEntries(formData);
+// export const action =
+//   (queryClient) =>
+//   async ({ request }) => {
+//     const formData = await request.formData();
+//     const data = Object.fromEntries(formData);
 
-    try {
-      const response = await customFetch.post('/auth/login', data);
-      queryClient.invalidateQueries();
-      const userWithTimestamp = {
-        ...response.data.tokenUser,
-        timestamp: new Date().toISOString(),
-      };
-      localStorage.setItem('user', JSON.stringify(userWithTimestamp));
-      if (data.redirectURL) {
-        return redirect(data.redirectURL);
-      }
-      return redirect('/dashboard');
-    } catch (error) {
-      toast.error(error?.response?.data?.msg);
-      return error;
-    }
-  };
+//     try {
+//       const response = await customFetch.post('/auth/login', data);
+//       queryClient.invalidateQueries();
+//       const userWithTimestamp = {
+//         ...response.data.tokenUser,
+//         timestamp: new Date().toISOString(),
+//       };
+//       localStorage.setItem('user', JSON.stringify(userWithTimestamp));
+//       if (data.redirectURL) {
+//         return redirect(data.redirectURL);
+//       }
+//       return redirect('/dashboard');
+//     } catch (error) {
+//       toast.error(error?.response?.data?.msg);
+//       return error;
+//     }
+//   };
 
 const Login = () => {
   const navigation = useNavigation();
-  const [queryParameters] = useSearchParams();
-  const isSubmitting = navigation.state === 'submitting';
+  // const [queryParameters] = useSearchParams();
+  const isSubmitting = navigation.state === "submitting";
   return (
     <>
-      <div className="h-full bg-gray-50" style={{ height: '100vh' }}>
+      <div className="h-full bg-gray-50" style={{ height: "100vh" }}>
         <div className="h-full">
           <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -126,7 +126,7 @@ const Login = () => {
                       className="flex w-full justify-center rounded-md bg-newport-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-newport-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-newport-900"
                       disabled={isSubmitting}
                     >
-                      {isSubmitting ? 'Loggt ein...' : 'Einloggen'}
+                      {isSubmitting ? "Loggt ein..." : "Einloggen"}
                     </button>
                   </div>
                 </Form>

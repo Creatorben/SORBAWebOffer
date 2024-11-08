@@ -15,27 +15,10 @@ import {
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon, UserIcon } from "@heroicons/react/20/solid";
 import NavLinks from "../components/Navlinks";
-import customFetch from "../utils/customFetch";
-import { toast } from "react-toastify";
+// import customFetch from "../utils/customFetch";
+// import { toast } from "react-toastify";
 import LogoLang from "../components/LogoLang";
 import { Loading } from "../components";
-import { useQuery } from "@tanstack/react-query";
-
-//   const userQuery = {
-//     queryKey: ['user'],
-//     queryFn: async () => {
-//       const { data } = await customFetch.get('/users/current-user');
-//       return data;
-//     },
-//   };
-
-//   export const loader = (queryClient) => async () => {
-//     try {
-//       return await queryClient.ensureQueryData(userQuery);
-//     } catch (error) {
-//       return redirect('/');
-//     }
-//   };
 
 const DashboardContext = createContext();
 
@@ -43,11 +26,10 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const DashboardLayout = ({ queryClient }) => {
+const DashboardLayout = () => {
   const navigate = useNavigate();
   const navigation = useNavigation();
   const isPageLoading = navigation.state === "loading";
-  // const { user } = useQuery(userQuery).data;
   const user = {
     firstName: "Beni",
     lastName: "Tester",
@@ -56,32 +38,6 @@ const DashboardLayout = ({ queryClient }) => {
     email: "test@sorba.ch",
   };
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [isAuthError, setIsAuthError] = useState(false);
-
-  const logoutUser = async () => {
-    navigate("/");
-    await customFetch.delete("/auth/logout");
-    localStorage.removeItem("user");
-    queryClient.invalidateQueries();
-    toast.success("Ausgeloggt");
-  };
-
-  customFetch.interceptors.response.use(
-    (response) => {
-      return response;
-    },
-    (error) => {
-      if (error?.response?.status === 401) {
-        setIsAuthError(true);
-      }
-      return Promise.reject(error);
-    }
-  );
-
-  // useEffect(() => {
-  //   if (!isAuthError) return;
-  //   logoutUser();
-  // }, [isAuthError]);
 
   return (
     <DashboardContext.Provider
