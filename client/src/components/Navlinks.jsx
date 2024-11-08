@@ -1,7 +1,7 @@
-import React from 'react';
-import { Dashboardnavigation } from '../utils/links.jsx';
-import { NavLink } from 'react-router-dom';
-import { Cog6ToothIcon } from '@heroicons/react/24/outline';
+import React from "react";
+import { Dashboardnavigation } from "../utils/links.jsx";
+import { NavLink } from "react-router-dom";
+import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 
 const NavLinks = ({ setSidebarOpen }) => {
   const navItems = Dashboardnavigation;
@@ -23,15 +23,15 @@ const NavLinks = ({ setSidebarOpen }) => {
                       <span
                         className={
                           isActive
-                            ? 'bg-gray-50 text-newport-900 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                            : 'text-gray-700 hover:text-newport-900 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                            ? "bg-gray-50 text-newport-900 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                            : "text-gray-700 hover:text-newport-900 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                         }
                       >
                         <span
                           className={
                             isActive
-                              ? 'text-newport-900 h-6 w-6 shrink-0'
-                              : 'text-gray-400 group-hover:text-newport-900 h-6 w-6 shrink-0'
+                              ? "text-newport-900 h-6 w-6 shrink-0"
+                              : "text-gray-400 group-hover:text-newport-900 h-6 w-6 shrink-0"
                           }
                           aria-hidden="true"
                         >
@@ -53,15 +53,15 @@ const NavLinks = ({ setSidebarOpen }) => {
                 <span
                   className={
                     isActive
-                      ? 'bg-gray-50 text-newport-900 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                      : 'text-gray-700 hover:text-newport-900 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                      ? "bg-gray-50 text-newport-900 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                      : "text-gray-700 hover:text-newport-900 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                   }
                 >
                   <Cog6ToothIcon
                     className={
                       isActive
-                        ? 'text-newport-900 h-6 w-6 shrink-0'
-                        : 'text-gray-400 group-hover:text-newport-900 h-6 w-6 shrink-0'
+                        ? "text-newport-900 h-6 w-6 shrink-0"
+                        : "text-gray-400 group-hover:text-newport-900 h-6 w-6 shrink-0"
                     }
                     aria-hidden="true"
                   />
