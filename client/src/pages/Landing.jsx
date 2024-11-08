@@ -1,59 +1,60 @@
-import React from 'react'
+import React from "react";
 
-import { useState } from 'react'
-import { Dialog, DialogPanel } from '@headlessui/react'
+import { useState } from "react";
+import { Dialog, DialogPanel } from "@headlessui/react";
 import {
   ArrowPathIcon,
   Bars3Icon,
   FingerPrintIcon,
   XMarkIcon,
   DocumentIcon,
-  PencilIcon
-} from '@heroicons/react/24/outline'
-import { CheckIcon } from '@heroicons/react/20/solid'
-import { navigation, footerNavigation } from '../utils/links.jsx'
-import Logo from '../components/Logo'
-import PrimaryButton from '../components/PrimaryButton'
-import SecondaryButton from '../components/SecondaryButton'
+  PencilIcon,
+} from "@heroicons/react/24/outline";
+import { CheckIcon } from "@heroicons/react/20/solid";
+import { navigation, footerNavigation } from "../utils/links.jsx";
+import Logo from "../components/Logo";
+import PrimaryButton from "../components/PrimaryButton";
+import SecondaryButton from "../components/SecondaryButton";
 
-  const features = [
-    {
-      name: 'Kostenlose Offerte',
-      description:
-        'Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.',
-      icon: DocumentIcon,
-    },
-    {
-      name: 'Eigentext',
-      description:
-        'Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.',
-      icon: PencilIcon,
-    },
-    {
-      name: 'Weiteres Feature',
-      description:
-        'Lorem Ipsum dolor sit amet.',
-      icon: ArrowPathIcon,
-    },
-    {
-        name: 'Weiteres Feature',
-        description:
-          'Lorem Ipsum dolor sit amet.',
-      icon: FingerPrintIcon,
-    },
-  ]
+const features = [
+  {
+    name: "Kostenlose Offerte",
+    description:
+      "Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.",
+    icon: DocumentIcon,
+  },
+  {
+    name: "Eigentext",
+    description:
+      "Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.",
+    icon: PencilIcon,
+  },
+  {
+    name: "Weiteres Feature",
+    description: "Lorem Ipsum dolor sit amet.",
+    icon: ArrowPathIcon,
+  },
+  {
+    name: "Weiteres Feature",
+    description: "Lorem Ipsum dolor sit amet.",
+    icon: FingerPrintIcon,
+  },
+];
 
 function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-  }
+  return classes.filter(Boolean).join(" ");
+}
 
 const Landing = () => {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <div className="bg-white">
       {/* Header */}
       <header className="absolute inset-x-0 top-0 z-50">
-        <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8">
+        <nav
+          aria-label="Global"
+          className="flex items-center justify-between p-6 lg:px-8"
+        >
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">SORBA Offerten Tool</span>
@@ -72,7 +73,11 @@ const Landing = () => {
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item) => (
-              <a key={item.name} href={item.href} className="text-sm/6 font-semibold text-gray-900">
+              <a
+                key={item.name}
+                href={item.href}
+                className="text-sm/6 font-semibold text-gray-900"
+              >
                 {item.name}
               </a>
             ))}
@@ -83,7 +88,11 @@ const Landing = () => {
             </a>
           </div>
         </nav>
-        <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
+        <Dialog
+          open={mobileMenuOpen}
+          onClose={setMobileMenuOpen}
+          className="lg:hidden"
+        >
           <div className="fixed inset-0 z-50" />
           <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
@@ -137,7 +146,7 @@ const Landing = () => {
             <div
               style={{
                 clipPath:
-                  'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+                  "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
               }}
               className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#cce8f6] to-[#1d89d2] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
             />
@@ -149,11 +158,15 @@ const Landing = () => {
                   Kostenlose Eigentext Devis erstellen
                 </h1>
                 <p className="mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">
-                  Mit unserem kostenlosen Tool erstellen Sie im handumdrehen Eigentext-Offerten.
+                  Mit unserem kostenlosen Tool erstellen Sie im handumdrehen
+                  Eigentext-Offerten.
                 </p>
                 <div className="mt-10 flex items-center justify-center gap-x-6">
                   <PrimaryButton text={"Jetzt starten"} link={"/login"} />
-                  <SecondaryButton text={"Weitere Infos"} link={"/"} />
+                  <SecondaryButton
+                    text={"Direkt starten (NUR IM TESTMODUS)"}
+                    link={"/dashboard"}
+                  />
                 </div>
               </div>
               <div className="mt-16 flow-root sm:mt-24">
@@ -176,18 +189,19 @@ const Landing = () => {
             <div
               style={{
                 clipPath:
-                  'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+                  "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
               }}
               className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#cce8f6] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
             />
           </div>
         </div>
 
-
         {/* Feature section */}
         <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8">
           <div className="mx-auto max-w-2xl lg:text-center">
-            <h2 className="text-base/7 font-semibold text-newport-900">Einfach starten</h2>
+            <h2 className="text-base/7 font-semibold text-newport-900">
+              Einfach starten
+            </h2>
             <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl lg:text-balance">
               Folgende Möglichkeiten stellen wir Ihnen kostenlos zur Verfügung
             </p>
@@ -201,11 +215,16 @@ const Landing = () => {
                 <div key={feature.name} className="relative pl-16">
                   <dt className="text-base/7 font-semibold text-gray-900">
                     <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-newport-900">
-                      <feature.icon aria-hidden="true" className="h-6 w-6 text-white" />
+                      <feature.icon
+                        aria-hidden="true"
+                        className="h-6 w-6 text-white"
+                      />
                     </div>
                     {feature.name}
                   </dt>
-                  <dd className="mt-2 text-base/7 text-gray-600">{feature.description}</dd>
+                  <dd className="mt-2 text-base/7 text-gray-600">
+                    {feature.description}
+                  </dd>
                 </div>
               ))}
             </dl>
@@ -221,7 +240,7 @@ const Landing = () => {
             <div
               style={{
                 clipPath:
-                  'polygon(73.6% 48.6%, 91.7% 88.5%, 100% 53.9%, 97.4% 18.1%, 92.5% 15.4%, 75.7% 36.3%, 55.3% 52.8%, 46.5% 50.9%, 45% 37.4%, 50.3% 13.1%, 21.3% 36.2%, 0.1% 0.1%, 5.4% 49.1%, 21.4% 36.4%, 58.9% 100%, 73.6% 48.6%)',
+                  "polygon(73.6% 48.6%, 91.7% 88.5%, 100% 53.9%, 97.4% 18.1%, 92.5% 15.4%, 75.7% 36.3%, 55.3% 52.8%, 46.5% 50.9%, 45% 37.4%, 50.3% 13.1%, 21.3% 36.2%, 0.1% 0.1%, 5.4% 49.1%, 21.4% 36.4%, 58.9% 100%, 73.6% 48.6%)",
               }}
               className="aspect-[1108/632] w-[69.25rem] flex-none bg-gradient-to-r from-[#cce8f6] to-[#1d89d2] opacity-25"
             />
@@ -231,10 +250,12 @@ const Landing = () => {
               Starten Sie noch heute kostenlos
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-pretty text-lg/8 text-gray-600">
-              Mit unserem Eigentext-Offerten Tool stellen wir Ihnen eine optimale Möglichkeit zur Verfügung, die ersten Schritte mit Offerten zu machen.
+              Mit unserem Eigentext-Offerten Tool stellen wir Ihnen eine
+              optimale Möglichkeit zur Verfügung, die ersten Schritte mit
+              Offerten zu machen.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-            <PrimaryButton text={"Jetzt starten"} link={"/login"} />
+              <PrimaryButton text={"Jetzt starten"} link={"/login"} />
             </div>
           </div>
           <div
@@ -244,7 +265,7 @@ const Landing = () => {
             <div
               style={{
                 clipPath:
-                  'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+                  "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
               }}
               className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-[#cce8f6] to-[#1d89d2] opacity-30"
             />
@@ -260,11 +281,16 @@ const Landing = () => {
             <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
               <div className="md:grid md:grid-cols-2 md:gap-8">
                 <div>
-                  <h3 className="text-sm/6 font-semibold text-gray-900">Lösungen</h3>
+                  <h3 className="text-sm/6 font-semibold text-gray-900">
+                    Lösungen
+                  </h3>
                   <ul role="list" className="mt-6 space-y-4">
                     {footerNavigation.solutions.map((item) => (
                       <li key={item.name}>
-                        <a href={item.href} className="text-sm/6 text-gray-600 hover:text-gray-900">
+                        <a
+                          href={item.href}
+                          className="text-sm/6 text-gray-600 hover:text-gray-900"
+                        >
                           {item.name}
                         </a>
                       </li>
@@ -272,11 +298,16 @@ const Landing = () => {
                   </ul>
                 </div>
                 <div className="mt-10 md:mt-0">
-                  <h3 className="text-sm/6 font-semibold text-gray-900">Support</h3>
+                  <h3 className="text-sm/6 font-semibold text-gray-900">
+                    Support
+                  </h3>
                   <ul role="list" className="mt-6 space-y-4">
                     {footerNavigation.support.map((item) => (
                       <li key={item.name}>
-                        <a href={item.href} className="text-sm/6 text-gray-600 hover:text-gray-900">
+                        <a
+                          href={item.href}
+                          className="text-sm/6 text-gray-600 hover:text-gray-900"
+                        >
                           {item.name}
                         </a>
                       </li>
@@ -286,11 +317,16 @@ const Landing = () => {
               </div>
               <div className="md:grid md:grid-cols-2 md:gap-8">
                 <div>
-                  <h3 className="text-sm/6 font-semibold text-gray-900">Über SORBA</h3>
+                  <h3 className="text-sm/6 font-semibold text-gray-900">
+                    Über SORBA
+                  </h3>
                   <ul role="list" className="mt-6 space-y-4">
                     {footerNavigation.SORBA.map((item) => (
                       <li key={item.name}>
-                        <a href={item.href} className="text-sm/6 text-gray-600 hover:text-gray-900">
+                        <a
+                          href={item.href}
+                          className="text-sm/6 text-gray-600 hover:text-gray-900"
+                        >
                           {item.name}
                         </a>
                       </li>
@@ -298,11 +334,16 @@ const Landing = () => {
                   </ul>
                 </div>
                 <div className="mt-10 md:mt-0">
-                  <h3 className="text-sm/6 font-semibold text-gray-900">Rechtliches</h3>
+                  <h3 className="text-sm/6 font-semibold text-gray-900">
+                    Rechtliches
+                  </h3>
                   <ul role="list" className="mt-6 space-y-4">
                     {footerNavigation.legal.map((item) => (
                       <li key={item.name}>
-                        <a href={item.href} className="text-sm/6 text-gray-600 hover:text-gray-900">
+                        <a
+                          href={item.href}
+                          className="text-sm/6 text-gray-600 hover:text-gray-900"
+                        >
                           {item.name}
                         </a>
                       </li>
@@ -315,7 +356,7 @@ const Landing = () => {
         </div>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default Landing
+export default Landing;
