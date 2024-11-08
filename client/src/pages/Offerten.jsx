@@ -39,14 +39,6 @@ const Offerten = () => {
 
   return (
     <>
-      <PositionsSlideIn
-        open={open}
-        setOpen={setOpen}
-        editPosition={editPosition}
-        setEditPosition={setEditPosition}
-        positionen={positionen}
-        setPositionen={setPositionen}
-      />
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="bg-white py-6 sm:py-6">
           <div className="max-w-2xl text-left">
@@ -227,6 +219,14 @@ const Offerten = () => {
           </div>
         </div>
       </div>
+      <PositionsSlideIn
+        open={open}
+        setOpen={setOpen}
+        editPosition={editPosition}
+        setEditPosition={setEditPosition}
+        positionen={positionen}
+        setPositionen={setPositionen}
+      />
     </>
   );
 };
