@@ -1,11 +1,23 @@
 import React from "react";
-import { ChevronRightIcon } from "@heroicons/react/20/solid";
+import { DocumentCheckIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
 import PositionsSlideIn from "../components/dashboard/PositionsSlideIn";
+import { useDashboardContext } from "./DashboardLayout";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import Invoice from "../components/dashboard/Invoice";
+import { nanoid } from "nanoid";
+import { useNavigation } from "react-router-dom";
 
 const Offerten = () => {
+  const { user } = useDashboardContext();
   const [open, setOpen] = useState(false);
   const [editPosition, setEditPosition] = useState([]);
+
+  const [kundenadresse, setKundenadresse] = useState();
+
+  const navigation = useNavigation();
+  const isPageLoading = navigation.state === "loading";
+
   const [positionen, setPositionen] = useState([
     {
       id: "213904124",
@@ -23,6 +35,8 @@ const Offerten = () => {
     },
   ]);
 
+  const offerCode = nanoid(6);
+
   return (
     <>
       <PositionsSlideIn
@@ -34,8 +48,8 @@ const Offerten = () => {
         setPositionen={setPositionen}
       />
       <div className="px-4 sm:px-6 lg:px-8">
-        <div className="bg-white px-6 py-6 sm:py-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
+        <div className="bg-white py-6 sm:py-6">
+          <div className="max-w-2xl text-left">
             <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
               Offerten erstellen
             </h2>
@@ -61,9 +75,10 @@ const Offerten = () => {
               <textarea
                 id="kundenadresse"
                 name="kundenadresse"
+                value={kundenadresse}
+                onChange={(e) => setKundenadresse(e.target.value)}
                 rows={4}
                 className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-newport-600 sm:text-sm/6"
-                defaultValue={""}
               />
             </div>
           </div>
@@ -83,7 +98,10 @@ const Offerten = () => {
                 <button
                   type="button"
                   className="block rounded-md bg-newport-900 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-newport-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-newport-900"
-                  onClick={() => setOpen(true)}
+                  onClick={() => {
+                    setOpen(true);
+                    setEditPosition({});
+                  }}
                 >
                   Neue Position hinzufügen
                 </button>
@@ -152,19 +170,58 @@ const Offerten = () => {
                             {position.preis * position.menge} CHF
                           </td>
                           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                            <a
-                              href="#"
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setEditPosition(position);
+                                setOpen(true);
+                              }}
                               className="text-newport-900 hover:text-newport-900"
                             >
                               Bearbeiten
                               <span className="sr-only">, {position.text}</span>
-                            </a>
+                            </button>
                           </td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Offerte generieren */}
+
+        <div className="mt-6 pt-6">
+          <div className="sm:flex sm:items-center">
+            <div className="sm:flex-auto">
+              <h3 className="text-base font-semibold text-gray-900">Fertig?</h3>
+              <p className="mt-2 text-sm text-gray-700">
+                Mit dem Klick auf den Button wird deine Offerte erstellt.
+              </p>
+              <div className="mt-6">
+                <PDFDownloadLink
+                  document={
+                    <Invoice
+                      positionen={positionen}
+                      user={user}
+                      kundenadresse={kundenadresse}
+                      offerCode={offerCode}
+                    />
+                  }
+                  fileName={`Offerte_${offerCode}.pdf`}
+                  className="inline-flex items-center gap-x-2 rounded-md bg-newport-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-newport-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-newport-900"
+                >
+                  <DocumentCheckIcon
+                    aria-hidden="true"
+                    className="-ml-0.5 h-5 w-5"
+                  />
+                  {isPageLoading
+                    ? "Offerte wird erstellt..."
+                    : "Offerte herunterladen"}
+                </PDFDownloadLink>
               </div>
             </div>
           </div>

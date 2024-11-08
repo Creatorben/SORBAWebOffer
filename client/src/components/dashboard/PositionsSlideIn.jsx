@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { useEffect } from "react";
 
 const PositionsSlideIn = ({
   open,
@@ -10,6 +11,12 @@ const PositionsSlideIn = ({
   positionen,
   setPositionen,
 }) => {
+  useEffect(() => {
+    setText(editPosition?.text || "");
+    setMengenEinheit(editPosition?.mengenEinheit || "");
+    setMenge(editPosition?.menge || "");
+    setPreis(editPosition?.preis || "");
+  }, [editPosition]);
   const [text, setText] = useState(editPosition?.text || "");
   const [mengenEinheit, setMengenEinheit] = useState(
     editPosition?.mengenEinheit || ""
@@ -17,8 +24,18 @@ const PositionsSlideIn = ({
   const [menge, setMenge] = useState(editPosition?.menge || "");
   const [preis, setPreis] = useState(editPosition?.preis || "");
 
+  const resetForm = () => {
+    setOpen(false);
+    setText("");
+    setMengenEinheit("");
+    setMenge("");
+    setPreis("");
+    setEditPosition(null); // Reset edit position
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const newPosition = {
       id: Date.now().toString(), // Generates a unique ID for new position
       text,
@@ -27,14 +44,30 @@ const PositionsSlideIn = ({
       preis,
     };
 
-    // Add new position to positionen array
-    setPositionen((positionen) => [...positionen, newPosition]);
-    setOpen(false); // Close the dialog after adding the position
-    setText("");
-    setMengenEinheit("");
-    setMenge("");
-    setPreis("");
+    setPositionen((positionen) => {
+      // Check if editPosition has an ID and if the ID exists in the array
+      if (editPosition?.id) {
+        // Map through the array and update the matching object by ID
+        return positionen.map((position) =>
+          position.id === editPosition.id ? newPosition : position
+        );
+      } else {
+        // Add new position to positionen array if no editPosition ID
+        return [...positionen, newPosition];
+      }
+    });
+    resetForm();
   };
+
+  const handleDelete = () => {
+    if (editPosition?.id) {
+      setPositionen((positionen) =>
+        positionen.filter((position) => position.id !== editPosition.id)
+      );
+      resetForm();
+    }
+  };
+
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-[100]">
       <div className="fixed inset-0" />
@@ -158,6 +191,17 @@ const PositionsSlideIn = ({
                   </div>
                 </div>
                 <div className="flex shrink-0 justify-end px-4 py-4">
+                  {editPosition.id ? (
+                    <button
+                      type="button"
+                      onClick={handleDelete}
+                      className="mr-auto rounded-md bg-red-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-400"
+                    >
+                      Löschen
+                    </button>
+                  ) : (
+                    ""
+                  )}
                   <button
                     type="button"
                     onClick={() => setOpen(false)}
