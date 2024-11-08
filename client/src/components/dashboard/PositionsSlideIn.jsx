@@ -12,11 +12,13 @@ const PositionsSlideIn = ({
   setPositionen,
 }) => {
   useEffect(() => {
-    setText(editPosition?.text || "");
-    setMengenEinheit(editPosition?.mengenEinheit || "");
-    setMenge(editPosition?.menge || "");
-    setPreis(editPosition?.preis || "");
-  }, [editPosition]);
+    if (open && editPosition) {
+      setText(editPosition?.text || "");
+      setMengenEinheit(editPosition?.mengenEinheit || "");
+      setMenge(editPosition?.menge || "");
+      setPreis(editPosition?.preis || "");
+    }
+  }, [open, editPosition]);
   const [text, setText] = useState(editPosition?.text || "");
   const [mengenEinheit, setMengenEinheit] = useState(
     editPosition?.mengenEinheit || ""

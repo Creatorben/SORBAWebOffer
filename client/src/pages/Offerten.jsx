@@ -7,6 +7,7 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import Invoice from "../components/dashboard/Invoice";
 import { nanoid } from "nanoid";
 import { useNavigation } from "react-router-dom";
+import { useMemo } from "react";
 
 const Offerten = () => {
   const { user } = useDashboardContext();
@@ -35,7 +36,14 @@ const Offerten = () => {
     },
   ]);
 
-  const offerCode = nanoid(6);
+  const [offerDownload, setOfferDownload] = useState(false);
+
+  const handleDownloadClick = () => {
+    // Set the selected order ID to the clicked one
+    setOfferDownload(true);
+  };
+
+  const offerCode = useMemo(() => nanoid(6), []);
 
   return (
     <>
@@ -194,26 +202,36 @@ const Offerten = () => {
                 Mit dem Klick auf den Button wird deine Offerte erstellt.
               </p>
               <div className="mt-6">
-                <PDFDownloadLink
-                  document={
-                    <Invoice
-                      positionen={positionen}
-                      user={user}
-                      kundenadresse={kundenadresse}
-                      offerCode={offerCode}
+                {offerDownload ? (
+                  <PDFDownloadLink
+                    document={
+                      <Invoice
+                        positionen={positionen}
+                        user={user}
+                        kundenadresse={kundenadresse}
+                        offerCode={offerCode}
+                      />
+                    }
+                    fileName={`Offerte_${offerCode}.pdf`}
+                    className="inline-flex items-center gap-x-2 rounded-md bg-newport-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-newport-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-newport-900"
+                  >
+                    <DocumentCheckIcon
+                      aria-hidden="true"
+                      className="-ml-0.5 h-5 w-5"
                     />
-                  }
-                  fileName={`Offerte_${offerCode}.pdf`}
-                  className="inline-flex items-center gap-x-2 rounded-md bg-newport-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-newport-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-newport-900"
-                >
-                  <DocumentCheckIcon
-                    aria-hidden="true"
-                    className="-ml-0.5 h-5 w-5"
-                  />
-                  {isPageLoading
-                    ? "Offerte wird erstellt..."
-                    : "Offerte herunterladen"}
-                </PDFDownloadLink>
+                    {isPageLoading
+                      ? "Offerte wird erstellt..."
+                      : "Offerte herunterladen"}
+                  </PDFDownloadLink>
+                ) : (
+                  <button
+                    type="button"
+                    className="inline-flex items-center gap-x-2 rounded-md bg-newport-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-newport-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-newport-900"
+                    onClick={handleDownloadClick}
+                  >
+                    Offerte generieren
+                  </button>
+                )}
               </div>
             </div>
           </div>
